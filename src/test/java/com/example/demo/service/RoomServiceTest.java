@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 @SpringBootTest
 public class RoomServiceTest {
 
-//    @Autowired
+    @Autowired
     private RoomService roomService;
 
     @Mock
@@ -49,7 +49,7 @@ public class RoomServiceTest {
         List<Room> roomMock = new ArrayList<Room>();
         roomMock.add(new Room("LNT A",8, "10 Macbooks", true));
 
-        given(roomRepository.findRoomsByStatusEquals(true)).willReturn(roomMock);
+        given(roomRepository.findRoomsByActiveIsTrueAndStatusEquals(true)).willReturn(roomMock);
 
         List<Room> rooms = roomService.getAllAvailableRoom();
 
@@ -67,11 +67,21 @@ public class RoomServiceTest {
     @Test
     public void updateRoomDescriptionTest(){
 
-        given(roomRepository.findRoomsById(1)).willReturn(new Room("LNT D",10,"10 IMac",true));
+        given(roomRepository.findRoomByActiveIsTrueAndIdEquals(1)).willReturn(new Room("LNT D",10,"10 IMac",true));
 
         Room roomSample = new Room("LNT A", 80, "10 Macbooks", true);
 
         boolean isUpdated = roomService.updateRoomDescription(roomSample, 1);
+
+        assertThat(isUpdated).isTrue();
+    }
+
+    @Test
+    public void removeRoomTest(){
+
+        given(roomRepository.findRoomByActiveIsTrueAndIdEquals(1)).willReturn(new Room("LNT D",10,"10 IMac",true));
+
+        boolean isUpdated = roomService.removeRoom(1);
 
         assertThat(isUpdated).isTrue();
     }

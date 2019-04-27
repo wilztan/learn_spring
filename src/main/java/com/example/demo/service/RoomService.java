@@ -12,4 +12,6 @@ public interface RoomService {
 
     public boolean updateRoomDescription(Room room, long roomId);
 
+    public boolean removeRoom(long roomId);
+
 }
