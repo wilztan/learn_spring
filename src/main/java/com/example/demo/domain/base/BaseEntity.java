@@ -26,7 +26,7 @@ public class BaseEntity {
     @GeneratedValue
     private long id;
 
-    private boolean isActive = true;
+    private boolean active = true;
 
     @CreationTimestamp
     private Date createdAt;
