@@ -13,7 +13,7 @@ public class BaseEntity {
 
     private long id;
 
-    private boolean isActive;
+    private boolean isActive = true;
 
     private Date createdAt;
 
