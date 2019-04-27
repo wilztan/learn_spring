@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room,Long> {
 
+    public List<Room> findRoomsByActiveIsTrue();
+
     public List<Room> findRoomsByActiveIsTrueAndStatusEquals(boolean status);
 
     public Room findRoomByActiveIsTrueAndIdEquals(long id);
