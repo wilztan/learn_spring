@@ -1,7 +1,12 @@
 package com.example.demo.domain.base;
 
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
@@ -11,15 +16,20 @@ import java.util.Date;
  * all entities where it provides the
  * id, active boolean, created and updated date
  */
+@MappedSuperclass
 @Getter
 public class BaseEntity {
 
+    @Id
+    @GeneratedValue
     private long id;
 
     private boolean isActive = true;
 
+    @CreationTimestamp
     private Date createdAt;
 
+    @UpdateTimestamp
     private Date updatedAt;
 
 }

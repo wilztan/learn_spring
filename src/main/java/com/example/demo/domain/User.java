@@ -10,12 +10,16 @@ import lombok.ToString;
 @ToString
 public class User extends BaseEntity {
 
-    private String name;
+    private final String name;
 
-    private String email;
+    private final String email;
 
-    private long phone;
+    private final long phone;
 
-    private String password;
+    private final String password;
+
+    User(){
+        this(null,null,0L,null);
+    }
 
 }

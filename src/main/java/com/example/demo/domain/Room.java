@@ -10,10 +10,16 @@ import lombok.ToString;
 @ToString
 public class Room extends BaseEntity {
 
-    private String roomNumber;
+    private final String roomNumber;
 
-    private int capacity;
+    private final int capacity;
 
-    private String facility;
+    private final String facility;
+
+    private final boolean status;
+
+    Room(){
+        this(null,0,null,false);
+    }
 
 }

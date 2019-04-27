@@ -1,7 +1,6 @@
 package com.example.demo.domain;
 
 import com.example.demo.domain.base.BaseEntity;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -11,10 +10,14 @@ import lombok.ToString;
 @ToString
 public class Booking extends BaseEntity {
 
-    private Booking booking;
+    private final Booking booking;
 
-    private Room room;
+    private final Room room;
 
-    private String message;
+    private final String message;
+
+    Booking(){
+        this(null,null,null);
+    }
 
 }
