@@ -7,16 +7,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RoomServiceTest {
 
+    @Autowired
     private RoomService roomService;
 
     @Mock
@@ -29,7 +30,11 @@ public class RoomServiceTest {
 
     @Test
     public void insertNewRoomTest(){
-        boolean isInserted = roomService.insertNewRoom(any(Room.class));
+
+        Room roomSample = new Room("LNT A", 8, "10 Macbooks", true);
+        System.out.println(roomSample.toString());
+
+        boolean isInserted = roomService.insertNewRoom(roomSample);
 
         assertThat(isInserted).isTrue();
     }
