@@ -25,6 +25,18 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Room> getAllRoom() {
+        List<Room> rooms;
+        try {
+            rooms = roomRepository.findRoomsByActiveIsTrue();
+        }catch (Exception e){
+            logger.error(e.toString());
+            rooms = new ArrayList<Room>();
+        }
+        return rooms;
+    }
+
+    @Override
     public List<Room> getAllAvailableRoom() {
         List<Room> rooms;
         try {

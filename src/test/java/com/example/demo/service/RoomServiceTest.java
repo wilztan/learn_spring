@@ -44,6 +44,26 @@ public class RoomServiceTest {
     }
 
     @Test
+    public void getAllRoomTest(){
+        List<Room> roomMock = new ArrayList<Room>();
+        roomMock.add(new Room("LNT A",8, "10 Macbooks", true));
+
+        given(roomRepository.findRoomsByActiveIsTrueAndStatusEquals(true)).willReturn(roomMock);
+
+        List<Room> rooms = roomService.getAllAvailableRoom();
+
+        int counter = 0;
+
+        for (Room room : rooms ) {
+            if (!room.isActive())
+                counter++;
+            System.out.println(room.getRoomNumber());
+        }
+
+        assertThat(counter).isLessThan(1);
+    }
+
+    @Test
     public void getAllAvailableRoomTest(){
 
         List<Room> roomMock = new ArrayList<Room>();

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface RoomService {
 
+    public List<Room> getAllRoom();
+
     public List<Room> getAllAvailableRoom();
 
     public boolean insertNewRoom(Room room);
