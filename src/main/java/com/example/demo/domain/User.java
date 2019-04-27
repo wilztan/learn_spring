@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Entity;
+
+@Entity
 @RequiredArgsConstructor
 @Getter
 @ToString
