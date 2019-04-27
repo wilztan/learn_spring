@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @RequiredArgsConstructor
@@ -13,9 +16,13 @@ import javax.persistence.Entity;
 @ToString
 public class Booking extends BaseEntity {
 
-    private final Booking booking;
-
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "rooms.id")
     private final Room room;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "users.id")
+    private final User user;
 
     private final String message;
 
