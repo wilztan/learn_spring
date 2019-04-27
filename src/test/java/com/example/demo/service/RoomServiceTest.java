@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,6 +45,12 @@ public class RoomServiceTest {
 
     @Test
     public void getAllAvailableRoomTest(){
+
+        List<Room> roomMock = new ArrayList<Room>();
+        roomMock.add(new Room("LNT A",8, "10 Macbooks", true));
+
+        given(roomRepository.findRoomsByStatusEquals(true)).willReturn(roomMock);
+
         List<Room> rooms = roomService.getAllAvailableRoom();
 
         int counter = 0;
@@ -50,6 +58,7 @@ public class RoomServiceTest {
         for (Room room : rooms ) {
             if (!room.isStatus())
                 counter++;
+            System.out.println(room.getRoomNumber());
         }
 
         assertThat(counter).isLessThan(1);

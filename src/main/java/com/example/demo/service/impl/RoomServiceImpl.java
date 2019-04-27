@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +26,8 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getAllAvailableRoom() {
-        return null;
+        List<Room> rooms = roomRepository.findRoomsByStatusEquals(true);
+        return rooms;
     }
 
     @Override
