@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -37,5 +39,19 @@ public class RoomServiceTest {
         boolean isInserted = roomService.insertNewRoom(roomSample);
 
         assertThat(isInserted).isTrue();
+    }
+
+    @Test
+    public void getAllAvailableRoomTest(){
+        List<Room> rooms = roomService.getAllAvailableRoom();
+
+        int counter = 0;
+
+        for (Room room : rooms ) {
+            if (!room.isStatus())
+                counter++;
+        }
+
+        assertThat(counter).isLessThan(1);
     }
 }
