@@ -8,4 +8,9 @@ public class Booking {
 
     private String message;
 
+    public Booking(Booking booking, Room room, String message) {
+        this.booking = booking;
+        this.room = room;
+        this.message = message;
+    }
 }
