@@ -1,10 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Room;
+import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.impl.RoomServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -17,9 +19,12 @@ public class RoomServiceTest {
 
     private RoomService roomService;
 
+    @Mock
+    private RoomRepository roomRepository;
+
     @Before
     public void SetUp(){
-        roomService = new RoomServiceImpl();
+        roomService = new RoomServiceImpl(roomRepository);
     }
 
     @Test
