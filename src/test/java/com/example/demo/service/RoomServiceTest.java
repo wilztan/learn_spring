@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 @SpringBootTest
 public class RoomServiceTest {
 
-    @Autowired
+//    @Autowired
     private RoomService roomService;
 
     @Mock
@@ -62,5 +62,17 @@ public class RoomServiceTest {
         }
 
         assertThat(counter).isLessThan(1);
+    }
+
+    @Test
+    public void updateRoomDescriptionTest(){
+
+        given(roomRepository.findRoomsById(1)).willReturn(new Room("LNT D",10,"10 IMac",true));
+
+        Room roomSample = new Room("LNT A", 80, "10 Macbooks", true);
+
+        boolean isUpdated = roomService.updateRoomDescription(roomSample, 1);
+
+        assertThat(isUpdated).isTrue();
     }
 }
