@@ -1,12 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Room;
+import com.example.demo.domain.base.BaseDto;
 import com.example.demo.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/room")
@@ -16,37 +19,43 @@ public class RoomController {
     RoomService roomService;
 
     @RequestMapping(method = RequestMethod.GET,path = "/available")
-    ResponseEntity<List<Room>> fetchAllAvailableRoom(){
+    ResponseEntity<BaseDto> fetchAllAvailableRoom(){
 
         List<Room> rooms = roomService.getAllAvailableRoom();
 
-        return  ResponseEntity.ok(rooms);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("rooms" , rooms);
+        resultMap.put("count" , rooms.size());
+
+        return  ResponseEntity.ok(
+                new BaseDto(resultMap,true,200)
+        );
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<Object> insertNewRoom(@RequestBody Room room){
+    ResponseEntity<BaseDto> insertNewRoom(@RequestBody Room room){
         boolean result = roomService.insertNewRoom(room);
 
         return ResponseEntity.ok(
-                result
+                new BaseDto(null,result,200)
         );
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    ResponseEntity<Object> updateRoom(@RequestBody Room room, @RequestParam("roomId") long roomId){
+    ResponseEntity<BaseDto> updateRoom(@RequestBody Room room, @RequestParam("roomId") long roomId){
         boolean result = roomService.updateRoomDescription(room,roomId);
 
         return ResponseEntity.ok(
-                result
+                new BaseDto(null,result,200)
         );
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    ResponseEntity<Object> deleteRoom(@RequestParam("roomId") long roomId){
+    ResponseEntity<BaseDto> deleteRoom(@RequestParam("roomId") long roomId){
         boolean result = roomService.removeRoom(roomId);
 
         return ResponseEntity.ok(
-                result
+                new BaseDto(null,result,200)
         );
     }
 
