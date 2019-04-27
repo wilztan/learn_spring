@@ -18,17 +18,31 @@ public class RoomController {
     @Autowired
     RoomService roomService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    ResponseEntity<BaseDto> fetchAllRoom(){
+
+        List<Room> rooms = roomService.getAllRoom();
+
+        return  ResponseEntity.ok(
+                new BaseDto(
+                        generateRoomResult(rooms),
+                        true,
+                        200
+                )
+        );
+    }
+
     @RequestMapping(method = RequestMethod.GET,path = "/available")
     ResponseEntity<BaseDto> fetchAllAvailableRoom(){
 
         List<Room> rooms = roomService.getAllAvailableRoom();
 
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("rooms" , rooms);
-        resultMap.put("count" , rooms.size());
-
         return  ResponseEntity.ok(
-                new BaseDto(resultMap,true,200)
+                new BaseDto(
+                        generateRoomResult(rooms),
+                        true,
+                        200
+                )
         );
     }
 
@@ -57,6 +71,16 @@ public class RoomController {
         return ResponseEntity.ok(
                 new BaseDto(null,result,200)
         );
+    }
+
+    private Object generateRoomResult(List<Room> rooms){
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+
+        resultMap.put("rooms" , rooms);
+
+        resultMap.put("count" , rooms.size());
+
+        return  resultMap;
     }
 
 }
