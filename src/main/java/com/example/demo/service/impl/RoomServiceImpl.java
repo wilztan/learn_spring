@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,5 +40,23 @@ public class RoomServiceImpl implements RoomService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean updateRoomDescription(Room room, long roomId) {
+        try {
+            Room updatedRoom = roomRepository.findRoomsById(roomId);
+
+            room.setId(updatedRoom.getId());
+
+            room.setActive(updatedRoom.isActive());
+
+            roomRepository.save(room);
+
+        }catch (Exception e){
+            logger.error(e.toString());
+            return false;
+        }
+        return  true;
     }
 }

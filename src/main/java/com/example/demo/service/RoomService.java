@@ -10,4 +10,6 @@ public interface RoomService {
 
     public boolean insertNewRoom(Room room);
 
+    public boolean updateRoomDescription(Room room, long roomId);
+
 }
